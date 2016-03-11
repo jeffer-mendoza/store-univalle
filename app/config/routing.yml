@@ -1,1 +1,6 @@
+univalle_admin:
+    resource: "@UnivalleAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 
