@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Created by Jefferson Mendoza.
+ * User: Jefferson Mendoza <jefferson.mendoza@correounivalle.edu.co>
+ * Date: 11/03/16
+ * Time: 02:31 PM
+ */
 namespace UnivalleAdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
