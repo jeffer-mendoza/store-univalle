@@ -48,7 +48,7 @@
 
 # Build data
 /build/
-
+/.idea/
 # Composer PHAR
 >>>>>>> 4b900eb204acb9843b9dcc700f509f59e619b2f0
 /composer.phar
