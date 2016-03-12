@@ -75,6 +75,52 @@ class CategoryController extends Controller
     }
 
     /**
+     * Al igual que el newAction, debe crearse el formulario que se va a enviar a la vista
+     * la diferencia es que aca no se crea la entidad, por el contrario, se toma los datos
+     * que existen en la base de datos para editarlos.
+     *
+     * @Route("/{id}/edit",name="category_edit")
+     * @Method("GET")
+     */
+    public function editAction(Category $category)
+    {
+        $form = $this->createForm(CategoryType::class, $category, array(
+            'action' => $this->generateUrl('category_update',array('id'=>$category->getId())),
+            'method' => 'PUT'
+        ));
+
+        return $this->render('UnivalleAdminBundle:Category:edit.html.twig', array(
+            'form' => $form->createView()
+        ));
+
+    }
+
+    /**
+     * @Route("/{id}/edit",name="category_update" )
+     * @Method("PUT")
+     */
+    public function updateAction(Request $request, Category $category)
+    {
+        $form = $this->createForm(CategoryType::class, $category, array(
+            'action' => $this->generateUrl('category_update',array('id'=>$category->getId())),
+            'method' => 'PUT'
+        ));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('category_show', array('id' => $category->getId())));
+        }
+
+        return $this->render('UnivalleAdminBundle:Category:edit.html.twig', array(
+            'form' => $form->createView()
+        ));
+
+    }
+
+    /**
      * Este método controla la persistencia de una nueva categoría
      *
      * Algoritmo:
